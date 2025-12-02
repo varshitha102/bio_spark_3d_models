@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioSpark - 3D Molecular Visualization System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+    <!-- Professional Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body data-theme="dark">
+    <!-- Animated Background Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Theme Toggle & Controls -->
+    <div class="global-controls">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <span class="theme-icon sun">☀️</span>
+            <span class="theme-icon moon active">🌙</span>
+        </button>
+        <button class="voice-toggle" id="voiceToggle" aria-label="Toggle voice explanation">
+            <span class="voice-icon">🔊</span>
+        </button>
+    </div>
+    
+    <div class="container">
+        <!-- Header with Professional Design -->
+        <header class="futuristic-header">
+            <div class="header-glow"></div>
+            <div class="header-content">
+                <h1 class="glitch-text" data-text="🧬 BIOSPARK">🧬 BIOSPARK</h1>
+                <h2 class="cyber-subtitle">3D Molecular Visualization System</h2>
+                <p class="subtitle neon-text">Interactive visualization of molecular structures and bacterial resistance pathways</p>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Molecules</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-label">Accuracy</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">∞</span>
+                    <span class="stat-label">Possibilities</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Enhanced Navigation with Modern Design -->
+        <nav class="tab-navigation glass-effect">
+            <button class="tab-btn active" onclick="showSection('overview')" data-section="overview">
+                <span class="btn-icon">🔍</span>
+                <span class="btn-text">Overview</span>
+                <span class="btn-glow"></span>
+            </button>
+            <button class="tab-btn" onclick="showSection('penicillin')" data-section="penicillin">
+                <span class="btn-icon">💊</span>
+                <span class="btn-text">Penicillin</span>
+                <span class="btn-glow"></span>
+            </button>
+            <button class="tab-btn" onclick="showSection('ciprofloxacin')" data-section="ciprofloxacin">
+                <span class="btn-icon">🔬</span>
+                <span class="btn-text">Ciprofloxacin</span>
+                <span class="btn-glow"></span>
+            </button>
+            <button class="tab-btn" onclick="showSection('tetracycline')" data-section="tetracycline">
+                <span class="btn-icon">🧪</span>
+                <span class="btn-text">Tetracycline</span>
+                <span class="btn-glow"></span>
+            </button>
+            <button class="tab-btn" onclick="showSection('resistance')" data-section="resistance">
+                <span class="btn-icon">⚡</span>
+                <span class="btn-text">Resistance</span>
+                <span class="btn-glow"></span>
+            </button>
+            <button class="tab-btn" onclick="showSection('comparison')" data-section="comparison">
+                <span class="btn-icon">📊</span>
+                <span class="btn-text">Comparison</span>
+                <span class="btn-glow"></span>
+            </button>
+        </nav>
+
+        <!-- Overview Section -->
+        <section id="overview" class="content-section active">
+            <h2 class="section-title"><span class="title-glow">Project Overview</span></h2>
+            <div class="info-card glass-effect fade-in">
+                <h3>About This Project</h3>
+                <p>This interactive visualization system demonstrates the 3D molecular structures of three major antibiotics and explains their mechanisms of action and bacterial resistance at the molecular level.</p>
+                
+                <div class="three-columns">
+                    <div class="column hover-lift">
+                        <h4>🔬 Penicillin</h4>
+                        <p>β-Lactam antibiotic that inhibits bacterial cell wall synthesis by targeting transpeptidase enzymes.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="column hover-lift">
+                        <h4>💊 Ciprofloxacin</h4>
+                        <p>Fluoroquinolone antibiotic that inhibits bacterial DNA gyrase and topoisomerase IV.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="column hover-lift">
+                        <h4>🧪 Tetracycline</h4>
+                        <p>Broad-spectrum antibiotic that inhibits bacterial protein synthesis by binding to the 30S ribosomal subunit.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card glass-effect fade-in">
+                <h3>Key Features</h3>
+                <ul class="feature-list-enhanced">
+                    <li><span class="feature-icon">🎯</span><strong>Interactive 3D Models:</strong> Rotate, zoom, and explore molecular structures</li>
+                    <li><span class="feature-icon">🎨</span><strong>Functional Group Highlighting:</strong> Identify key molecular components</li>
+                    <li><span class="feature-icon">💍</span><strong>β-Lactam Ring Focus:</strong> Special emphasis on penicillin's reactive center</li>
+                    <li><span class="feature-icon">🛡️</span><strong>Resistance Mechanisms:</strong> Understanding β-lactamase enzyme action</li>
+                    <li><span class="feature-icon">📊</span><strong>Comparative Analysis:</strong> Side-by-side molecular comparison</li>
+                    <li><span class="feature-icon">🔍</span><strong>Molecule Inspector:</strong> Hover atoms to see detailed information</li>
+                </ul>
+            </div>
+
+            <div class="info-card glass-effect fade-in">
+                <h3>Instructions</h3>
+                <div class="instructions-grid">
+                    <div class="instruction-item">
+                        <div class="instruction-icon">🗂️</div>
+                        <div class="instruction-content">
+                            <h4>Navigation</h4>
+                            <p>Use the tabs above to explore different antibiotics</p>
+                        </div>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-icon">🖱️</div>
+                        <div class="instruction-content">
+                            <h4>3D Interaction</h4>
+                            <p>Left-click and drag to rotate, scroll to zoom, right-click to pan</p>
+                        </div>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-icon">✨</div>
+                        <div class="instruction-content">
+                            <h4>Highlighting</h4>
+                            <p>Click buttons to highlight specific functional groups</p>
+                        </div>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-icon">🎓</div>
+                        <div class="instruction-content">
+                            <h4>Learning Path</h4>
+                            <p>Start with Overview → Individual antibiotics → Resistance mechanism</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Penicillin Section -->
+        <section id="penicillin" class="content-section">
+            <h2 class="section-title"><span class="title-glow">Penicillin (β-Lactam Antibiotic)</span></h2>
+            
+            <div class="molecule-container">
+                <div class="viewer-panel glass-effect hover-lift">
+                    <h3>3D Molecular Structure</h3>
+                    <div id="penicillin-viewer" class="mol-viewer"></div>
+                    <div class="inspector-tooltip" id="inspector-penicillin"></div>
+                    <div class="controls">
+                        <button onclick="highlightBetaLactam()" class="control-btn primary">
+                            <span class="btn-pulse"></span>
+                            Highlight β-Lactam Ring
+                        </button>
+                        <button onclick="highlightThiazolidine()" class="control-btn secondary">
+                            <span class="btn-pulse"></span>
+                            Highlight Thiazolidine Ring
+                        </button>
+                        <button onclick="highlightSideChain()" class="control-btn accent">
+                            <span class="btn-pulse"></span>
+                            Highlight Side Chain
+                        </button>
+                        <button onclick="resetPenicillin()" class="control-btn reset">
+                            <span class="btn-pulse"></span>
+                            Reset View
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="info-panel glass-effect">
+                    <h3>Molecular Information</h3>
+                    <div class="info-box cyber-box">
+                        <p><strong>Chemical Formula:</strong> C<sub>16</sub>H<sub>18</sub>N<sub>2</sub>O<sub>4</sub>S</p>
+                        <p><strong>Molecular Weight:</strong> 334.39 g/mol</p>
+                        <p><strong>Class:</strong> β-Lactam Antibiotic</p>
+                        <p><strong>Target:</strong> Bacterial cell wall synthesis</p>
+                    </div>
+                    
+                    <h3>Key Structural Features</h3>
+                    <div class="feature-list">
+                        <div class="feature-item beta-lactam glow-border">
+                            <strong>β-Lactam Ring (4-membered)</strong>
+                            <p>The reactive core - a strained amide ring that is crucial for antibiotic activity.</p>
+                        </div>
+                        <div class="feature-item thiazolidine glow-border">
+                            <strong>Thiazolidine Ring (5-membered)</strong>
+                            <p>Contains sulfur atom, provides structural stability.</p>
+                        </div>
+                        <div class="feature-item side-chain glow-border">
+                            <strong>Side Chain (R-group)</strong>
+                            <p>Variable region that determines specific penicillin types.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Mechanism of Action</h3>
+                    <ol class="mechanism-steps">
+                        <li><span class="step-number">1</span><strong>Target Binding:</strong> Penicillin mimics D-Ala-D-Ala substrate</li>
+                        <li><span class="step-number">2</span><strong>Covalent Bond Formation:</strong> β-lactam ring opens</li>
+                        <li><span class="step-number">3</span><strong>Enzyme Inactivation:</strong> Transpeptidase is permanently inhibited</li>
+                        <li><span class="step-number">4</span><strong>Cell Wall Disruption:</strong> Cannot cross-link peptidoglycan chains</li>
+                        <li><span class="step-number">5</span><strong>Bacterial Death:</strong> Osmotic pressure causes cell lysis</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ciprofloxacin Section -->
+        <section id="ciprofloxacin" class="content-section">
+            <h2 class="section-title"><span class="title-glow">Ciprofloxacin (Fluoroquinolone Antibiotic)</span></h2>
+            
+            <div class="molecule-container">
+                <div class="viewer-panel glass-effect hover-lift">
+                    <h3>3D Molecular Structure</h3>
+                    <div id="ciprofloxacin-viewer" class="mol-viewer"></div>
+                    <div class="inspector-tooltip" id="inspector-ciprofloxacin"></div>
+                    <div class="controls">
+                        <button onclick="highlightQuinoloneCore()" class="control-btn primary">
+                            <span class="btn-pulse"></span>
+                            Highlight Quinolone Core
+                        </button>
+                        <button onclick="highlightFluorine()" class="control-btn secondary">
+                            <span class="btn-pulse"></span>
+                            Highlight Fluorine
+                        </button>
+                        <button onclick="highlightPiperazine()" class="control-btn accent">
+                            <span class="btn-pulse"></span>
+                            Highlight Piperazine Ring
+                        </button>
+                        <button onclick="resetCiprofloxacin()" class="control-btn reset">
+                            <span class="btn-pulse"></span>
+                            Reset View
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="info-panel glass-effect">
+                    <h3>Molecular Information</h3>
+                    <div class="info-box cyber-box">
+                        <p><strong>Chemical Formula:</strong> C<sub>17</sub>H<sub>18</sub>FN<sub>3</sub>O<sub>3</sub></p>
+                        <p><strong>Molecular Weight:</strong> 331.34 g/mol</p>
+                        <p><strong>Class:</strong> Fluoroquinolone Antibiotic</p>
+                        <p><strong>Target:</strong> DNA gyrase and Topoisomerase IV</p>
+                    </div>
+                    
+                    <h3>Key Structural Features</h3>
+                    <div class="feature-list">
+                        <div class="feature-item quinolone glow-border">
+                            <strong>Quinolone Core</strong>
+                            <p>The central bicyclic structure essential for DNA gyrase binding.</p>
+                        </div>
+                        <div class="feature-item fluorine glow-border">
+                            <strong>Fluorine Atom</strong>
+                            <p>At position 6, enhances potency and gram-negative activity.</p>
+                        </div>
+                        <div class="feature-item piperazine glow-border">
+                            <strong>Piperazine Ring</strong>
+                            <p>At position 7, improves gram-positive activity.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Mechanism of Action</h3>
+                    <ol class="mechanism-steps">
+                        <li><span class="step-number">1</span><strong>Target Binding:</strong> Binds to DNA gyrase and topoisomerase IV</li>
+                        <li><span class="step-number">2</span><strong>DNA Complex Stabilization:</strong> Forms ternary complex</li>
+                        <li><span class="step-number">3</span><strong>Strand Break Induction:</strong> Prevents DNA relegation</li>
+                        <li><span class="step-number">4</span><strong>Replication Inhibition:</strong> Blocks DNA replication</li>
+                        <li><span class="step-number">5</span><strong>Bacterial Death:</strong> DNA breaks trigger cell death</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tetracycline Section -->
+        <section id="tetracycline" class="content-section">
+            <h2 class="section-title"><span class="title-glow">Tetracycline (Broad-Spectrum Antibiotic)</span></h2>
+            
+            <div class="molecule-container">
+                <div class="viewer-panel glass-effect hover-lift">
+                    <h3>3D Molecular Structure</h3>
+                    <div id="tetracycline-viewer" class="mol-viewer"></div>
+                    <div class="inspector-tooltip" id="inspector-tetracycline"></div>
+                    <div class="controls">
+                        <button onclick="highlightRingSystem()" class="control-btn primary">
+                            <span class="btn-pulse"></span>
+                            Highlight 4-Ring System
+                        </button>
+                        <button onclick="highlightHydrophilic()" class="control-btn secondary">
+                            <span class="btn-pulse"></span>
+                            Highlight Hydrophilic Groups
+                        </button>
+                        <button onclick="highlightDimethylamino()" class="control-btn accent">
+                            <span class="btn-pulse"></span>
+                            Highlight Dimethylamino Group
+                        </button>
+                        <button onclick="resetTetracycline()" class="control-btn reset">
+                            <span class="btn-pulse"></span>
+                            Reset View
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="info-panel glass-effect">
+                    <h3>Molecular Information</h3>
+                    <div class="info-box cyber-box">
+                        <p><strong>Chemical Formula:</strong> C<sub>22</sub>H<sub>24</sub>N<sub>2</sub>O<sub>8</sub></p>
+                        <p><strong>Molecular Weight:</strong> 444.43 g/mol</p>
+                        <p><strong>Class:</strong> Tetracycline Antibiotic</p>
+                        <p><strong>Target:</strong> 30S ribosomal subunit</p>
+                    </div>
+                    
+                    <h3>Key Structural Features</h3>
+                    <div class="feature-list">
+                        <div class="feature-item ring-system glow-border">
+                            <strong>Four-Ring System</strong>
+                            <p>The characteristic tetracyclic structure for ribosome binding.</p>
+                        </div>
+                        <div class="feature-item hydrophilic glow-border">
+                            <strong>Hydrophilic Groups</strong>
+                            <p>Multiple groups allow extensive hydrogen bonding.</p>
+                        </div>
+                        <div class="feature-item dimethylamino glow-border">
+                            <strong>Dimethylamino Group</strong>
+                            <p>Important for activity and positioning.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Mechanism of Action</h3>
+                    <ol class="mechanism-steps">
+                        <li><span class="step-number">1</span><strong>Ribosome Binding:</strong> Binds to 30S ribosomal subunit</li>
+                        <li><span class="step-number">2</span><strong>A-Site Blocking:</strong> Occupies aminoacyl-tRNA binding site</li>
+                        <li><span class="step-number">3</span><strong>tRNA Exclusion:</strong> Prevents tRNA binding</li>
+                        <li><span class="step-number">4</span><strong>Translation Inhibition:</strong> Protein synthesis is halted</li>
+                        <li><span class="step-number">5</span><strong>Bacteriostatic Effect:</strong> Growth is arrested</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Resistance Mechanism Section -->
+        <section id="resistance" class="content-section">
+            <h2 class="section-title"><span class="title-glow">β-Lactamase: The Resistance Mechanism</span></h2>
+            
+            <div class="resistance-container glass-effect">
+                <div class="resistance-explanation">
+                    <h3>Understanding Antibiotic Resistance</h3>
+                    <p>β-Lactamase is an enzyme produced by resistant bacteria that breaks down β-lactam antibiotics like penicillin, rendering them ineffective.</p>
+                    
+                    <!-- Animated Resistance Process -->
+                    <div class="animated-process">
+                        <div class="process-title">
+                            <h4>⚡ The β-Lactamase Attack Sequence</h4>
+                        </div>
+                        
+                        <div class="process-steps">
+                            <div class="process-step" data-step="1">
+                                <div class="step-visual">
+                                    <div class="molecule-icon intact">💊</div>
+                                    <div class="step-label">Intact Penicillin</div>
+                                </div>
+                                <div class="step-detail">
+                                    <h5>Phase 1: Active State</h5>
+                                    <p>β-Lactam ring is intact and highly reactive</p>
+                                    <ul>
+                                        <li>Ring strain creates reactivity</li>
+                                        <li>Perfect substrate mimicry</li>
+                                        <li>Ready to bind target</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="arrow-animated">
+                                <span class="arrow-line"></span>
+                                <span class="arrow-head">▼</span>
+                            </div>
+                            
+                            <div class="process-step" data-step="2">
+                                <div class="step-visual">
+                                    <div class="molecule-icon attacking">🧬⚡</div>
+                                    <div class="step-label">Enzyme Attack</div>
+                                </div>
+                                <div class="step-detail">
+                                    <h5>Phase 2: Enzymatic Assault</h5>
+                                    <p>β-Lactamase targets the carbonyl carbon</p>
+                                    <ul>
+                                        <li>Active site serine approaches</li>
+                                        <li>Nucleophilic attack initiated</li>
+                                        <li>Tetrahedral intermediate forms</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="arrow-animated">
+                                <span class="arrow-line"></span>
+                                <span class="arrow-head">▼</span>
+                            </div>
+                            
+                            <div class="process-step" data-step="3">
+                                <div class="step-visual">
+                                    <div class="molecule-icon breaking">💥</div>
+                                    <div class="step-label">Ring Cleavage</div>
+                                </div>
+                                <div class="step-detail">
+                                    <h5>Phase 3: Structural Breakdown</h5>
+                                    <p>C-N bond is cleaved through hydrolysis</p>
+                                    <ul>
+                                        <li>Water molecule assists</li>
+                                        <li>Ring opens catastrophically</li>
+                                        <li>Strain released completely</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="arrow-animated">
+                                <span class="arrow-line"></span>
+                                <span class="arrow-head">▼</span>
+                            </div>
+                            
+                            <div class="process-step" data-step="4">
+                                <div class="step-visual">
+                                    <div class="molecule-icon inactive">❌</div>
+                                    <div class="step-label">Inactive Product</div>
+                                </div>
+                                <div class="step-detail">
+                                    <h5>Phase 4: Inactivation Complete</h5>
+                                    <p>Open-ring molecule is biologically useless</p>
+                                    <ul>
+                                        <li>No reactivity remaining</li>
+                                        <li>Cannot bind target enzyme</li>
+                                        <li>Antibiotic neutralized</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card glass-effect comparison-box">
+                        <h4>Why Ring Opening Causes Inactivation</h4>
+                        <div class="two-columns">
+                            <div class="comparison-side active-side">
+                                <h5>✅ Intact Ring (Active)</h5>
+                                <ul>
+                                    <li><span class="check">✓</span> Ring strain makes carbonyl highly reactive</li>
+                                    <li><span class="check">✓</span> Perfect geometry to mimic substrate</li>
+                                    <li><span class="check">✓</span> Can form covalent bond</li>
+                                    <li><span class="check">✓</span> Irreversibly inhibits enzyme</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-side inactive-side">
+                                <h5>❌ Opened Ring (Inactive)</h5>
+                                <ul>
+                                    <li><span class="cross">✗</span> No ring strain - not reactive</li>
+                                    <li><span class="cross">✗</span> Wrong shape for binding</li>
+                                    <li><span class="cross">✗</span> Cannot form stable complex</li>
+                                    <li><span class="cross">✗</span> No inhibitory activity</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resistance-types">
+                    <h3>Types of β-Lactamases</h3>
+                    <div class="lactamase-types">
+                        <div class="lactamase-card hover-lift">
+                            <div class="card-icon">A</div>
+                            <h4>Class A</h4>
+                            <p><strong>Examples:</strong> TEM, SHV, CTX-M</p>
+                            <p><strong>Mechanism:</strong> Serine-based hydrolysis</p>
+                            <div class="card-footer">Most common</div>
+                        </div>
+                        <div class="lactamase-card hover-lift">
+                            <div class="card-icon">B</div>
+                            <h4>Class B</h4>
+                            <p><strong>Examples:</strong> NDM, VIM, IMP</p>
+                            <p><strong>Mechanism:</strong> Zinc-dependent</p>
+                            <div class="card-footer">Metallo-β-lactamases</div>
+                        </div>
+                        <div class="lactamase-card hover-lift">
+                            <div class="card-icon">C</div>
+                            <h4>Class C</h4>
+                            <p><strong>Examples:</strong> AmpC, CMY</p>
+                            <p><strong>Mechanism:</strong> Chromosomal</p>
+                            <div class="card-footer">Cephalosporinases</div>
+                        </div>
+                        <div class="lactamase-card hover-lift">
+                            <div class="card-icon">D</div>
+                            <h4>Class D</h4>
+                            <p><strong>Examples:</strong> OXA enzymes</p>
+                            <p><strong>Mechanism:</strong> Serine-based</p>
+                            <div class="card-footer">Oxacillinases</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="clinical-impact glass-effect">
+                    <h3>⚔️ Strategies to Combat Resistance</h3>
+                    <div class="strategy-grid">
+                        <div class="strategy-card">
+                            <div class="strategy-icon">🛡️</div>
+                            <h4>β-Lactamase Inhibitors</h4>
+                            <p>Clavulanic acid, sulbactam, tazobactam protect the antibiotic</p>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-icon">🔧</div>
+                            <h4>Modified β-Lactams</h4>
+                            <p>Carbapenems are more resistant to enzymatic hydrolysis</p>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-icon">🤝</div>
+                            <h4>Combination Therapy</h4>
+                            <p>β-lactam + β-lactamase inhibitor synergy</p>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-icon">📚</div>
+                            <h4>Antibiotic Stewardship</h4>
+                            <p>Proper usage protocols to slow resistance development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section id="comparison" class="content-section">
+            <h2 class="section-title"><span class="title-glow">Comparative Analysis</span></h2>
+            
+            <div class="comparison-container glass-effect">
+                <div class="comparison-viewers">
+                    <div class="comparison-viewer hover-lift">
+                        <h3>Penicillin</h3>
+                        <div id="penicillin-compare" class="mol-viewer-small"></div>
+                        <div class="viewer-badge">β-Lactam</div>
+                    </div>
+                    <div class="comparison-viewer hover-lift">
+                        <h3>Ciprofloxacin</h3>
+                        <div id="ciprofloxacin-compare" class="mol-viewer-small"></div>
+                        <div class="viewer-badge">Fluoroquinolone</div>
+                    </div>
+                    <div class="comparison-viewer hover-lift">
+                        <h3>Tetracycline</h3>
+                        <div id="tetracycline-compare" class="mol-viewer-small"></div>
+                        <div class="viewer-badge">Tetracycline</div>
+                    </div>
+                </div>
+                
+                <div class="comparison-table-wrapper">
+                    <h3>Structural and Functional Comparison</h3>
+                    <div class="table-scroll">
+                        <table class="cyber-table">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Penicillin</th>
+                                    <th>Ciprofloxacin</th>
+                                    <th>Tetracycline</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Class</strong></td>
+                                    <td><span class="badge badge-primary">β-Lactam</span></td>
+                                    <td><span class="badge badge-secondary">Fluoroquinolone</span></td>
+                                    <td><span class="badge badge-accent">Tetracycline</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Core Structure</strong></td>
+                                    <td>4-membered lactam ring</td>
+                                    <td>Bicyclic quinolone</td>
+                                    <td>4 fused rings</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Molecular Weight</strong></td>
+                                    <td>~334 g/mol</td>
+                                    <td>~331 g/mol</td>
+                                    <td>~444 g/mol</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Target</strong></td>
+                                    <td>Transpeptidase</td>
+                                    <td>DNA Gyrase</td>
+                                    <td>30S Ribosome</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mechanism</strong></td>
+                                    <td>Inhibits cell wall</td>
+                                    <td>Inhibits DNA replication</td>
+                                    <td>Inhibits protein synthesis</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Effect</strong></td>
+                                    <td><span class="effect-badge bactericidal">Bactericidal</span></td>
+                                    <td><span class="effect-badge bactericidal">Bactericidal</span></td>
+                                    <td><span class="effect-badge bacteriostatic">Bacteriostatic</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Spectrum</strong></td>
+                                    <td>Narrow</td>
+                                    <td>Broad</td>
+                                    <td>Broad</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Resistance</strong></td>
+                                    <td>β-Lactamase</td>
+                                    <td>Mutations, efflux</td>
+                                    <td>Efflux, protection</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="futuristic-footer">
+            <div class="footer-content">
+                <p class="footer-title">🧬 BIOSPARK</p>
+                <p>Interactive 3D Molecular Visualization System</p>
+                <p class="footer-tech">Built with 3Dmol.js | Flask | Modern Web Technologies</p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Documentation</a>
+                    <span class="separator">|</span>
+                    <a href="#" class="footer-link">GitHub</a>
+                    <span class="separator">|</span>
+                    <a href="#" class="footer-link">About</a>
+                </div>
+            </div>
+            <div class="footer-glow"></div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/molecules.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/particles.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/inspector.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/voice.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/help.js') }}"></script>
+</body>
+</html>
